@@ -75,14 +75,16 @@
 // console.log(axel);
 
 class Student {
-  constructor({ name, age, grade, className, facebook, instagram = [], x }) {
+  constructor({ name, age, grade, className, facebook, instagram, x }) {
     this.name = name;
     this.age = age;
     this.grade = grade;
     this.className = className;
-    this.facebook = facebook;
-    this.instagram = instagram;
-    this.x = x;
+    this.socialMedia = {
+      facebook,
+      instagram,
+      x,
+    };
   }
 }
 
@@ -94,6 +96,19 @@ const axel = new Student({
   age: 30,
 });
 
-axel.instagram.push("axlo");
+axel.socialMedia.facebook = "axlo";
 
 console.log(axel);
+
+class Level1 extends Student {
+  constructor({ name, age, grade, className, facebook, instagram, x, level }) {
+    super({ name, age, grade, className, facebook, instagram, x });
+    this.level = level;
+  }
+}
+
+axel.level = 4;
+
+console.log(axel);
+
+const riki = new Level1({});
