@@ -78,7 +78,7 @@ class Student {
   constructor({ name, age, grade, className, facebook, instagram, x }) {
     this.name = name;
     this.age = age;
-    this.grade = grade;
+    this._grade = grade;
     this.className = className;
     this.socialMedia = {
       facebook,
@@ -86,17 +86,24 @@ class Student {
       x,
     };
   }
+  get grade() {
+    return this._grade;
+  }
+  set grade(newGrade) {
+    this._grade = newGrade + "ds";
+  }
 }
 
 const axel = new Student({
-  x: "axelquartz",
   className: "B",
   name: "Axel",
   grade: 80,
   age: 30,
+  instagram: "axsup",
 });
 
 axel.socialMedia.facebook = "axlo";
+axel.grade = 90;
 
 console.log(axel);
 
@@ -106,9 +113,3 @@ class Level1 extends Student {
     this.level = level;
   }
 }
-
-axel.level = 4;
-
-console.log(axel);
-
-const riki = new Level1({});
