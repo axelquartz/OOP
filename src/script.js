@@ -79,7 +79,7 @@ class Student {
     this.name = name;
     this.age = age;
     this._grade = grade;
-    this.className = className;
+    this._className = className;
     this.socialMedia = {
       facebook,
       instagram,
@@ -90,7 +90,17 @@ class Student {
     return this._grade;
   }
   set grade(newGrade) {
-    this._grade = newGrade + "ds";
+    if (newGrade > 100) {
+      this._grade = newGrade + "over 100";
+    } else {
+      this._grade = newGrade + "under 100";
+    }
+  }
+  get className() {
+    return this._className;
+  }
+  set className(newClassName) {
+    this._className = newClassName + " OFFICIAL";
   }
 }
 
@@ -103,7 +113,8 @@ const axel = new Student({
 });
 
 axel.socialMedia.facebook = "axlo";
-axel.grade = 90;
+axel.grade = 102;
+axel.className = "A";
 
 console.log(axel);
 
