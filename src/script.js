@@ -119,8 +119,18 @@ axel.className = "A";
 console.log(axel);
 
 class Level1 extends Student {
-  constructor({ name, age, grade, className, facebook, instagram, x, level }) {
-    super({ name, age, grade, className, facebook, instagram, x });
+  constructor(props, level) {
+    super(props);
     this.level = level;
   }
 }
+
+const riki = new Level1({
+  className: "A",
+  name: "Riki",
+  grade: 80,
+  age: 30,
+  instagram: "axsup",
+});
+
+console.log(riki);
