@@ -189,7 +189,7 @@ function videoPause(id) {
   console.log(`Pausing video: ${url}`);
 }
 
-class CourseClass {
+export class CourseClass {
   constructor({ name, duration, videoID }) {
     this._name = name;
     this.duration = duration;
@@ -250,7 +250,7 @@ const escuelaJavascript = new LearningPaths({
 const escuelaPython = new LearningPaths({ name: "Escuela Python", courses: ["Python", "Django", "Flask"] });
 
 class Student {
-  constructor({ name, age, approbedCourses = ["JavaScript", "Node", "React"], socialMedia, learningPaths, mail }) {
+  constructor({ name, age, approbedCourses = ["JavaScript", "Node", "React"], socialMedia, learningPaths, mail, comment, rating }) {
     this._name = name;
     this.age = age;
     this.approbedCourses = approbedCourses;
@@ -261,6 +261,8 @@ class Student {
     };
     this.learningPaths = learningPaths;
     this.mail = mail;
+    this.comment = comment;
+    this.rating = rating;
   }
   // Metodos
   approveCouse(newCourse) {
@@ -280,14 +282,6 @@ class Student {
       this._name = newName;
     }
   }
-}
-
-class Comment extends Student {
-  constructor(options, { comment, rating }) {
-    super(options);
-    this._comment = comment;
-    this._rating = rating;
-  }
   get comment() {
     return this._comment;
   }
@@ -302,7 +296,7 @@ class Comment extends Student {
   }
 }
 
-const riki = new Comment(
+const riki = new Student(
   {
     name: "Ri",
     age: 24,
