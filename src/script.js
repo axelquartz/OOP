@@ -172,14 +172,65 @@
 
 // console.log(natalia);
 
+class Course {
+  constructor({ name, classes = [] }) {
+    this.name = name;
+    this.classes = classes;
+  }
+}
+
+class CourseClass {
+  constructor({ name, duration }) {
+    this.name = name;
+    this.duration = duration;
+  }
+}
+
+//Course Classes
+const whatIsJavaScript = new CourseClass({
+  name: "What is JavaScript",
+  duration: "2h",
+});
+
+const practiceJavaScript = new CourseClass({
+  name: "Practice JavaScript",
+  duration: "2h",
+});
+
+const javascriptObjects = new CourseClass({
+  name: "JavaScript Objects",
+  duration: "2h",
+});
+
+//Courses
+const javascriptFundamentals = new Course({
+  name: "JavaScript Fundamentals",
+  classes: [whatIsJavaScript, practiceJavaScript, javascriptObjects],
+});
+
+const javascriptIntermediate = new Course({
+  name: "JavaScript Intermediate",
+  classes: [whatIsJavaScript, practiceJavaScript, javascriptObjects],
+});
+
+const javascriptAdvanced = new Course({
+  name: "JavaScript Advanced",
+  classes: [whatIsJavaScript, practiceJavaScript, javascriptObjects],
+});
+
 class LearningPaths {
-  constructor(name, courses = []) {
+  constructor({ name, courses = [] }) {
     this.name = name;
     this.courses = courses;
   }
 }
 
-const escuelaJavascript = new LearningPaths("Escuela Javascript", ["JavaScript", "Node", "React"]);
+const escuelaJavascript = new LearningPaths({
+  name: "Escuela JavaScript",
+  courses: [javascriptFundamentals, javascriptIntermediate, javascriptAdvanced, "React", "Redux"],
+});
+
+const escuelaPython = new LearningPaths({ name: "Escuela Python", courses: ["Python", "Django", "Flask"] });
 
 class Student {
   constructor({ name, age, approbedCourses = ["JavaScript", "Node", "React"], socialMedia, learningPaths, mail }) {
@@ -201,7 +252,15 @@ class Student {
   }
 }
 
-const riki = new Student({
+class Comment extends Student {
+  constructor(props, { comment, rating }) {
+    super(props);
+    this.comment = comment;
+    this.rating = rating;
+  }
+}
+
+const riki = new Comment({
   name: "Riki",
   age: 24,
   approbedCourses: ["JavaScript", "Node", "React"],
@@ -210,7 +269,10 @@ const riki = new Student({
     instagram: "axsup",
     x: "axsup",
   },
-  learningPaths: escuelaJavascript,
+  learningPaths: [escuelaJavascript, escuelaPython],
+  mail: "axsup",
+  comment: "Excelente",
+  rating: 5,
 });
 
 riki.approveCouse("JAVA");
