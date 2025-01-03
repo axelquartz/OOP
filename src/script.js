@@ -253,27 +253,31 @@ class Student {
 }
 
 class Comment extends Student {
-  constructor(props, { comment, rating }) {
-    super(props);
+  constructor(options, { comment, rating }) {
+    super(options);
     this.comment = comment;
     this.rating = rating;
   }
 }
 
-const riki = new Comment({
-  name: "Riki",
-  age: 24,
-  approbedCourses: ["JavaScript", "Node", "React"],
-  socialMedia: {
-    facebook: "axsup",
-    instagram: "axsup",
-    x: "axsup",
+const riki = new Comment(
+  {
+    name: "Riki",
+    age: 24,
+    approbedCourses: ["JavaScript", "Node", "React"],
+    socialMedia: {
+      facebook: "axsup",
+      instagram: "axsup",
+      x: "axsup",
+    },
+    learningPaths: [escuelaJavascript, escuelaPython],
+    mail: "axsup",
   },
-  learningPaths: [escuelaJavascript, escuelaPython],
-  mail: "axsup",
-  comment: "Excelente",
-  rating: 5,
-});
+  {
+    comment: "Excelente curso",
+    rating: 5,
+  }
+);
 
 riki.approveCouse("JAVA");
 
