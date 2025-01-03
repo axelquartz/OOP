@@ -179,10 +179,27 @@ class Course {
   }
 }
 
+function videoPlay(id) {
+  const url = `https://youtube.com/watch?v=${id}`;
+  console.log(`Playing video: ${url}`);
+}
+
+function videoPause(id) {
+  const url = `https://youtube.com/watch?v=${id}`;
+  console.log(`Pausing video: ${url}`);
+}
+
 class CourseClass {
-  constructor({ name, duration }) {
-    this.name = name;
+  constructor({ name, duration, videoID }) {
+    this._name = name;
     this.duration = duration;
+    this.videoID = videoID;
+  }
+  playVideo() {
+    videoPlay(this.videoID);
+  }
+  pauseVideo() {
+    videoPause(this.videoID);
   }
 }
 
@@ -234,7 +251,7 @@ const escuelaPython = new LearningPaths({ name: "Escuela Python", courses: ["Pyt
 
 class Student {
   constructor({ name, age, approbedCourses = ["JavaScript", "Node", "React"], socialMedia, learningPaths, mail }) {
-    this.name = name;
+    this._name = name;
     this.age = age;
     this.approbedCourses = approbedCourses;
     this.socialMedia = {
@@ -250,19 +267,44 @@ class Student {
     this.approbedCourses.push(newCourse);
     console.log(`${newCourse} has been approved`);
   }
+  // Getters y Setters
+  get name() {
+    return this._name;
+  }
+  set name(newName) {
+    if (newName.length < 3) {
+      console.log("Name needs to be at least 3 characters long");
+      this._name = undefined;
+      return;
+    } else {
+      this._name = newName;
+    }
+  }
 }
 
 class Comment extends Student {
   constructor(options, { comment, rating }) {
     super(options);
-    this.comment = comment;
-    this.rating = rating;
+    this._comment = comment;
+    this._rating = rating;
+  }
+  get comment() {
+    return this._comment;
+  }
+  get rating() {
+    return this._rating;
+  }
+  set comment(newComment) {
+    this._comment = newComment;
+  }
+  set rating(newRating) {
+    this._rating = newRating;
   }
 }
 
 const riki = new Comment(
   {
-    name: "Riki",
+    name: "Ri",
     age: 24,
     approbedCourses: ["JavaScript", "Node", "React"],
     socialMedia: {
@@ -278,6 +320,8 @@ const riki = new Comment(
     rating: 5,
   }
 );
+
+riki.name = "Rk";
 
 riki.approveCouse("JAVA");
 
