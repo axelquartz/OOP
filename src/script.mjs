@@ -296,6 +296,33 @@ class Student {
   }
 }
 
+class freeStudent extends Student {
+  constructor(props) {
+    super(props);
+  }
+  approveCouse(newCourse) {
+    console.log("Free students can't approve courses");
+  }
+}
+
+class basicStudent extends Student {
+  constructor(props) {
+    super(props);
+  }
+  approveCouse(newCourse) {
+    console.log("Student has approved course");
+  }
+}
+
+class expertStudent extends Student {
+  constructor(props) {
+    super(props);
+  }
+  approveCouse(newCourse) {
+    console.log("Student has approved course");
+  }
+}
+
 const riki = new Student(
   {
     name: "Ri",
