@@ -190,7 +190,7 @@ function videoPause(id) {
   console.log(`Pausing video: ${url}`);
 }
 
-export class CourseClass {
+class CourseClass {
   constructor({ name, duration, videoID }) {
     this._name = name;
     this.duration = duration;
@@ -318,11 +318,7 @@ class basicStudent extends Student {
     super(props);
   }
   approveCouse(newCourse) {
-    if (newCourse.isFree) {
-      this.approbedCourses.push(newCourse);
-    } else {
-      console.log("This course is not free");
-    }
+    this.approbedCourses.push(newCourse);
   }
 }
 

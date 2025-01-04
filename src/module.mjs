@@ -1,4 +1,4 @@
-import { CourseClass } from "./script.mjs";
+import { CourseClass } from "./script.js";
 
 const extraClass = new CourseClass({
   name: "Extra Class",
