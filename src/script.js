@@ -172,6 +172,19 @@
 
 // console.log(natalia);
 
+class Comment {
+  constructor({ content, studentName, studentRole = "Student" }) {
+    this.content = content;
+    this.studentName = studentName;
+    this.studentRole = studentRole;
+    this.likes = 0;
+  }
+  publish() {
+    console.log(this.studentName, this.studentRole, this.likes);
+    console.log(this.content);
+  }
+}
+
 class Course {
   constructor({ name, classes = [], isFree = false }) {
     this.name = name;
@@ -254,7 +267,7 @@ const escuelaJavascript = new LearningPaths({
 const escuelaPython = new LearningPaths({ name: "Escuela Python", courses: ["Python", "Django", "Flask"] });
 
 class Student {
-  constructor({ name, age, approbedCourses = ["JavaScript", "Node", "React"], socialMedia, learningPaths, mail, comment, rating }) {
+  constructor({ name, age, approbedCourses = ["JavaScript", "Node", "React"], socialMedia, learningPaths, mail }) {
     this._name = name;
     this.age = age;
     this.approbedCourses = approbedCourses;
@@ -265,8 +278,6 @@ class Student {
     };
     this.learningPaths = learningPaths;
     this.mail = mail;
-    this.comment = comment;
-    this.rating = rating;
   }
   // Metodos
   approveCouse(newCourse) {
@@ -286,17 +297,9 @@ class Student {
       this._name = newName;
     }
   }
-  get comment() {
-    return this._comment;
-  }
-  get rating() {
-    return this._rating;
-  }
-  set comment(newComment) {
-    this._comment = newComment;
-  }
-  set rating(newRating) {
-    this._rating = newRating;
+  publishComment(commentContent) {
+    commentContent = new Comment({ content: commentContent, studentName: this.name });
+    commentContent.publish();
   }
 }
 
@@ -328,6 +331,19 @@ class expertStudent extends Student {
   }
   approveCouse(newCourse) {
     this.approbedCourses.push(newCourse);
+  }
+}
+
+class teacherStudent extends Student {
+  constructor(props) {
+    super(props);
+  }
+  approveCouse(newCourse) {
+    this.approbedCourses.push(newCourse);
+  }
+  publishComment(commentContent) {
+    commentContent = new Comment({ content: commentContent, studentName: this.name, studentRole: "Teacher" });
+    commentContent.publish();
   }
 }
 
@@ -383,6 +399,23 @@ const luis = new expertStudent({
   comment: "Excelente curso",
   rating: 5,
 });
+
+const ibara = new teacherStudent({
+  name: "Ibara",
+  age: 30,
+  approbedCourses: ["JavaScript", "Node", "React"],
+  socialMedia: {
+    facebook: "axsup",
+    instagram: "axsup",
+    x: "axsup",
+  },
+  learningPaths: [escuelaJavascript, escuelaPython],
+  mail: "axsup",
+  comment: "Excelente curso",
+  rating: 5,
+});
+
+ibara.publishComment("Excelente este curso, padre");
 
 luis.approveCouse(javascriptAdvanced);
 
