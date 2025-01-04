@@ -173,9 +173,10 @@
 // console.log(natalia);
 
 class Course {
-  constructor({ name, classes = [] }) {
+  constructor({ name, classes = [], isFree = false }) {
     this.name = name;
     this.classes = classes;
+    this.isFree = isFree;
   }
 }
 
@@ -223,16 +224,19 @@ const javascriptObjects = new CourseClass({
 const javascriptFundamentals = new Course({
   name: "JavaScript Fundamentals",
   classes: [whatIsJavaScript, practiceJavaScript, javascriptObjects],
+  isFree: true,
 });
 
 const javascriptIntermediate = new Course({
   name: "JavaScript Intermediate",
   classes: [whatIsJavaScript, practiceJavaScript, javascriptObjects],
+  isFree: false,
 });
 
 const javascriptAdvanced = new Course({
   name: "JavaScript Advanced",
   classes: [whatIsJavaScript, practiceJavaScript, javascriptObjects],
+  isFree: false,
 });
 
 class LearningPaths {
@@ -301,7 +305,11 @@ class freeStudent extends Student {
     super(props);
   }
   approveCouse(newCourse) {
-    console.log("Free students can't approve courses");
+    if (newCourse.isFree) {
+      this.approbedCourses.push(newCourse);
+    } else {
+      console.log("This course is not free");
+    }
   }
 }
 
@@ -310,7 +318,11 @@ class basicStudent extends Student {
     super(props);
   }
   approveCouse(newCourse) {
-    console.log("Student has approved course");
+    if (newCourse.isFree) {
+      this.approbedCourses.push(newCourse);
+    } else {
+      console.log("This course is not free");
+    }
   }
 }
 
@@ -319,31 +331,63 @@ class expertStudent extends Student {
     super(props);
   }
   approveCouse(newCourse) {
-    console.log("Student has approved course");
+    this.approbedCourses.push(newCourse);
   }
 }
 
-const riki = new Student(
-  {
-    name: "Ri",
-    age: 24,
-    approbedCourses: ["JavaScript", "Node", "React"],
-    socialMedia: {
-      facebook: "axsup",
-      instagram: "axsup",
-      x: "axsup",
-    },
-    learningPaths: [escuelaJavascript, escuelaPython],
-    mail: "axsup",
+const riki = new freeStudent({
+  name: "Riki",
+  age: 24,
+  approbedCourses: ["JavaScript", "Node", "React"],
+  socialMedia: {
+    facebook: "axsup",
+    instagram: "axsup",
+    x: "axsup",
   },
-  {
-    comment: "Excelente curso",
-    rating: 5,
-  }
-);
+  learningPaths: [escuelaJavascript, escuelaPython],
+  mail: "axsup",
+  comment: "Excelente curso",
+  rating: 5,
+});
 
-riki.name = "Rk";
-
-riki.approveCouse("JAVA");
+riki.approveCouse(javascriptFundamentals);
 
 console.log(riki);
+
+const natalia = new basicStudent({
+  name: "Natalia",
+  age: 30,
+  approbedCourses: ["JavaScript", "Node", "React"],
+  socialMedia: {
+    facebook: "axsup",
+    instagram: "axsup",
+    x: "axsup",
+  },
+  learningPaths: [escuelaJavascript, escuelaPython],
+  mail: "axsup",
+  comment: "Excelente curso",
+  rating: 5,
+});
+
+natalia.approveCouse(javascriptAdvanced);
+
+console.log(natalia);
+
+const luis = new expertStudent({
+  name: "Luis",
+  age: 30,
+  approbedCourses: ["JavaScript", "Node", "React"],
+  socialMedia: {
+    facebook: "axsup",
+    instagram: "axsup",
+    x: "axsup",
+  },
+  learningPaths: [escuelaJavascript, escuelaPython],
+  mail: "axsup",
+  comment: "Excelente curso",
+  rating: 5,
+});
+
+luis.approveCouse(javascriptAdvanced);
+
+console.log(luis);
