@@ -101,7 +101,7 @@
 // console.log(axel);
 
 // var axel;
-nameOfDog = "Rocco";
-console.log(nameOfDog);
-let nameOfDog = "Rex";
-console.log(nameOfDog);
+// nameOfDog = "Rocco";
+// console.log(nameOfDog);
+// let nameOfDog = "Rex";
+// console.log(nameOfDog);
