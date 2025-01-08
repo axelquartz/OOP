@@ -72,17 +72,36 @@
 // moneyBox(20);
 // moneyBox(30);
 
-function moneyBox() {
-  let saveCoins = 0;
-  function countCoins(coins) {
-    saveCoins += coins;
-    console.log(`MoneyBox: $${saveCoins}`);
-    return saveCoins;
-  }
-  return countCoins;
-}
+// function moneyBox() {
+//   let saveCoins = 0;
+//   function countCoins(coins) {
+//     saveCoins += coins;
+//     console.log(`MoneyBox: $${saveCoins}`);
+//     return saveCoins;
+//   }
+//   return countCoins;
+// }
 
-const myMoneyBox = moneyBox();
-myMoneyBox(10);
-myMoneyBox(20);
-myMoneyBox(30);
+// const myMoneyBox = moneyBox();
+// myMoneyBox(10);
+// myMoneyBox(20);
+// myMoneyBox(30);
+
+// var axel;
+// var riki;
+
+// axel = "Axelo Reyes";
+// riki = "Rikitonga";
+
+// console.log(axel);
+// console.log(riki);
+
+// axel = "Axelo";
+
+// console.log(axel);
+
+// var axel;
+nameOfDog = "Rocco";
+console.log(nameOfDog);
+let nameOfDog = "Rex";
+console.log(nameOfDog);
