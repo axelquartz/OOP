@@ -70,6 +70,35 @@
 // console.log(Object.getOwnPropertyDescriptors(axel));
 // console.log(Object.keys(axel));
 
+// const axel = {
+//   name: "Axel",
+//   age: 30,
+//   height: 1.8,
+//   weight: 92,
+//   interests: {
+//     sport: "Basketball",
+//     music: "Rock",
+//   },
+// };
+
+// const riki = {};
+// for (prop in axel) {
+//   riki[prop] = axel[prop];
+// }
+
+// axel.skinColor = "Brown";
+// riki.interests.music = "Pop";
+
+// const laura = Object.create(axel);
+
+// laura.__proto__.interests.music = "Jazz";
+
+// console.log(laura);
+
+// console.log(laura.interests.music);
+// console.log(axel.interests.music);
+// console.log(riki.interests.music);
+
 const axel = {
   name: "Axel",
   age: 30,
@@ -81,20 +110,10 @@ const axel = {
   },
 };
 
-const riki = {};
-for (prop in axel) {
-  riki[prop] = axel[prop];
-}
+const data = JSON.stringify(axel);
+const riki = JSON.parse(data);
 
-axel.skinColor = "Brown";
 riki.interests.music = "Pop";
 
-const laura = Object.create(axel);
-
-laura.__proto__.interests.music = "Jazz";
-
-console.log(laura);
-
-console.log(laura.interests.music);
-console.log(axel.interests.music);
-console.log(riki.interests.music);
+console.log(riki);
+console.log(axel);
