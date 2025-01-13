@@ -99,21 +99,43 @@
 // console.log(axel.interests.music);
 // console.log(riki.interests.music);
 
-const axel = {
-  name: "Axel",
-  age: 30,
-  height: 1.8,
-  weight: 92,
-  interests: {
-    sport: "Basketball",
-    music: "Rock",
-  },
-};
+// const axel = {
+//   name: "Axel",
+//   age: 30,
+//   height: 1.8,
+//   weight: 92,
+//   interests: {
+//     sport: "Basketball",
+//     music: "Rock",
+//   },
+// };
 
-const data = JSON.stringify(axel);
-const riki = JSON.parse(data);
+// const data = JSON.stringify(axel);
+// const riki = JSON.parse(data);
 
-riki.interests.music = "Pop";
+// riki.interests.music = "Pop";
 
-console.log(riki);
-console.log(axel);
+// console.log(riki);
+// console.log(axel);
+
+// function recursiveFunction(num) {
+//   if (num < 5) {
+//     console.log(num);
+//     return recursiveFunction(num + 1);
+//   } else {
+//     return "Its over 4";
+//   }
+// }
+
+// console.log(recursiveFunction(0));
+
+function anotherRecursiveFunction(num) {
+  if (num < 10) {
+    console.log(num);
+    return anotherRecursiveFunction(num + 1);
+  } else {
+    console.log("Condition is not being meet");
+  }
+}
+
+anotherRecursiveFunction(8);
