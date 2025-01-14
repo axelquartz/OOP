@@ -129,13 +129,70 @@
 
 // console.log(recursiveFunction(0));
 
-function anotherRecursiveFunction(num) {
-  if (num < 10) {
-    console.log(num);
-    return anotherRecursiveFunction(num + 1);
-  } else {
-    console.log("Condition is not being meet");
-  }
+// function anotherRecursiveFunction(num) {
+//   if (num < 10) {
+//     console.log(num);
+//     return anotherRecursiveFunction(num + 1);
+//   } else {
+//     console.log("Condition is not being meet");
+//   }
+// }
+
+// anotherRecursiveFunction(8);
+
+// function recursive() {
+//   if(/*Validation*/) {
+//     // Recursive calls
+//   } else {
+//     // Non recursive calls (normal)
+//   }
+// }
+
+// const nums = [0, 1, 2, 3, 23, 5, 6, 7];
+
+// // let num = 0;
+
+// // for (let i = 0; i < nums.length; i++) {
+// //   num = nums[i];
+// //   console.log({ i, num });
+// // }
+
+// function recursiveNums(num) {
+//   if (num < nums.length) {
+//     console.log({ i: num, nums: nums[num] });
+//     return recursiveNums(num + 1);
+//   } else {
+//     console.log("DONE", num);
+
+//     return;
+//   }
+// }
+
+// recursiveNums(0);
+
+const axel = {
+  name: "Axel",
+  age: 30,
+  height: 1.8,
+  weight: 92,
+  interests: {
+    sport: "Basketball",
+    music: "Rock",
+  },
+};
+
+function isObject(obj) {
+  return typeof obj === "object";
+}
+function isArray(obj) {
+  return Array.isArray(obj);
 }
 
-anotherRecursiveFunction(8);
+function deepCopy(obj) {
+  let copyObject;
+
+  const objIsArray = isArray(obj);
+  const objIsObject = isObject(obj);
+
+  return copyObject;
+}
