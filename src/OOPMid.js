@@ -170,50 +170,97 @@
 
 // recursiveNums(0);
 
-const axel = {
-  name: "Axel",
-  age: 30,
-  height: 1.8,
-  weight: 92,
-  interests: {
-    sport: "Basketball",
-    music: "Rock",
-  },
-};
+// const axel = {
+//   name: "Axel",
+//   age: 30,
+//   height: 1.8,
+//   weight: 92,
+//   interests: {
+//     sport: "Basketball",
+//     music: "Rock",
+//   },
+//   sayName() {
+//     console.log("My name is " + this.name);
+//   },
+// };
 
-function isObject(obj) {
-  return typeof obj === "object";
-}
-function isArray(obj) {
-  return Array.isArray(obj);
-}
+// function isObject(obj) {
+//   return typeof obj === "object";
+// }
+// function isArray(obj) {
+//   return Array.isArray(obj);
+// }
 
-function deepCopy(obj) {
-  let copyObject;
+// function deepCopy(obj) {
+//   let copyObject;
 
-  const objIsArray = isArray(obj);
-  const objIsObject = isObject(obj);
+//   const objIsArray = isArray(obj);
+//   const objIsObject = isObject(obj);
 
-  if (objIsArray) {
-    copyObject = [];
-  } else if (objIsObject) {
-    copyObject = {};
-  } else {
-    return obj;
+//   if (objIsArray) {
+//     copyObject = [];
+//   } else if (objIsObject) {
+//     copyObject = {};
+//   } else {
+//     return obj;
+//   }
+
+//   for (key in obj) {
+//     const value = obj[key];
+//     copyObject[key] = deepCopy(value);
+//     if (objIsArray) {
+//       copyObject.push(value);
+//     } else if (objIsObject) {
+//       copyObject[key] = value;
+//     }
+//   }
+
+//   return copyObject;
+// }
+
+// const copy = deepCopy(axel);
+// console.log(copy);
+
+let num = 0;
+
+const nums = [1, 2, 3, 8, 9, 10, 14, 15, 16];
+
+// function numRecursion(num) {
+//   if (num < 6) {
+//     console.log(num);
+//     return numRecursion(num + 1);
+//   } else {
+//     console.log("DONE");
+//     return num;
+//   }
+// }
+
+// numRecursion(num);
+
+function printNumsIndex(num) {
+  console.log(num);
+  for (num; num < nums.length; num++) {
+    console.log(`Index: ${num}, Number: ${nums[num]}`);
   }
-
-  for (key in obj) {
-    const value = obj[key];
-    copyObject[key] = deepCopy(value);
-    if (objIsArray) {
-      copyObject.push(value);
-    } else if (objIsObject) {
-      copyObject[key] = value;
-    }
-  }
-
-  return copyObject;
 }
 
-const copy = deepCopy(axel);
-console.log(copy);
+function recursiveIndex(num) {
+  if (num < nums.length) {
+    console.log(`Index: ${num}, Number:${nums[num]}`);
+
+    return recursiveIndex(num + 1);
+  }
+}
+
+// recursiveIndex(num);
+
+function recursiveArr(numsArr) {
+  if (numsArr.length != 0) {
+    const firstNum = numsArr[0];
+    console.log(`FirstNum: ${firstNum}, nums: ${nums}`);
+    numsArr.shift();
+    return recursiveArr(numsArr);
+  }
+}
+
+recursiveArr(nums);
