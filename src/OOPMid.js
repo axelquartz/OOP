@@ -327,14 +327,28 @@
 // console.log(riki);
 // console.log(axel);
 
-function createStudent({ name, age, email }) {
+function requiredParam(param) {
+  throw new Error(param + " Missing param");
+}
+
+function createStudent({ name = requiredParam("name"), age, email = requiredParam("email"), twitter, instagram, approvedCourses = [], learningPaths = [] } = {}) {
   return {
     name: name,
     age: age,
     email: email,
+    socialMedia: { twitter: twitter, instagram: instagram },
+    approvedCourses: approvedCourses,
+    learningPaths: learningPaths,
   };
 }
 
-const breda = createStudent({ email: "dfsfd@fds", name: "Breda", age: 20 });
+const breda = createStudent({
+  email: "dfsfd@fds",
+  name: "Breda",
+  age: 20,
+  twitter: "xaeltoro",
+  instagram: "axsup",
+  approvedCourses: ["JavaScript", "Node", "React"],
+});
 
 console.log(breda);
