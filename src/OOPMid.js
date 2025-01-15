@@ -194,5 +194,26 @@ function deepCopy(obj) {
   const objIsArray = isArray(obj);
   const objIsObject = isObject(obj);
 
+  if (objIsArray) {
+    copyObject = [];
+  } else if (objIsObject) {
+    copyObject = {};
+  } else {
+    return obj;
+  }
+
+  for (key in obj) {
+    const value = obj[key];
+    copyObject[key] = deepCopy(value);
+    if (objIsArray) {
+      copyObject.push(value);
+    } else if (objIsObject) {
+      copyObject[key] = value;
+    }
+  }
+
   return copyObject;
 }
+
+const copy = deepCopy(axel);
+console.log(copy);
