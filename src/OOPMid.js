@@ -221,38 +221,52 @@
 // const copy = deepCopy(axel);
 // console.log(copy);
 
-let num = 0;
+// let num = 0;
 
-const nums = [1, 2, 3, 8, 9, 10, 14, 15, 16];
+// const nums = [1, 2, 3, 8, 9, 10, 14, 15, 16];
 
-// function numRecursion(num) {
-//   if (num < 6) {
-//     console.log(num);
-//     return numRecursion(num + 1);
-//   } else {
-//     console.log("DONE");
-//     return num;
+// // function numRecursion(num) {
+// //   if (num < 6) {
+// //     console.log(num);
+// //     return numRecursion(num + 1);
+// //   } else {
+// //     console.log("DONE");
+// //     return num;
+// //   }
+// // }
+
+// // numRecursion(num);
+
+// function printNumsIndex(num) {
+//   console.log(num);
+//   for (num; num < nums.length; num++) {
+//     console.log(`Index: ${num}, Number: ${nums[num]}`);
 //   }
 // }
 
-// numRecursion(num);
+// function recursiveIndex(num) {
+//   if (num < nums.length) {
+//     console.log(`Index: ${num}, Number:${nums[num]}`);
 
-function printNumsIndex(num) {
-  console.log(num);
-  for (num; num < nums.length; num++) {
-    console.log(`Index: ${num}, Number: ${nums[num]}`);
-  }
-}
-
-function recursiveIndex(num) {
-  if (num < nums.length) {
-    console.log(`Index: ${num}, Number:${nums[num]}`);
-
-    return recursiveIndex(num + 1);
-  }
-}
+//     return recursiveIndex(num + 1);
+//   }
+// }
 
 // recursiveIndex(num);
+
+const axel = {
+  name: "Axel",
+  age: 30,
+  height: 1.8,
+  weight: 92,
+  interests: {
+    sport: "Basketball",
+    music: "Rock",
+  },
+  sayName() {
+    console.log("My name is " + this.name);
+  },
+};
 
 function recursiveArr(numsArr) {
   if (numsArr.length != 0) {
@@ -263,4 +277,52 @@ function recursiveArr(numsArr) {
   }
 }
 
-recursiveArr(nums);
+// recursiveArr(nums);
+
+function isObjetc(subject) {
+  return typeof subject == "object";
+}
+
+function isArray(subject) {
+  return Array.isArray(subject);
+}
+
+console.log(isArray(axel));
+
+function deepCopy(subject) {
+  let copySubject;
+
+  const subjectIsObject = isObjetc(subject);
+  const subjectIsArray = isArray(subject);
+
+  if (subjectIsObject) {
+    copySubject = {};
+  } else if (subjectIsArray) {
+    copySubject = [];
+  } else {
+    return subject;
+  }
+
+  for (key in subject) {
+    const keyIsObject = isObjetc(subject[key]);
+    if (keyIsObject) {
+      copySubject[key] = deepCopy(subject[key]);
+    } else {
+      if (subjectIsArray) {
+        copySubject.push(subject[key]);
+      } else {
+        copySubject[key] = subject[key];
+      }
+    }
+  }
+
+  return copySubject;
+}
+
+const riki = deepCopy(axel);
+
+riki.name = "Riki";
+riki.interests.music = "Bossa Nova";
+
+console.log(riki);
+console.log(axel);
