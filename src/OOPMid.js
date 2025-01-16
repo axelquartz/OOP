@@ -279,46 +279,6 @@
 
 // // recursiveArr(nums);
 
-// function isObjetc(subject) {
-//   return typeof subject == "object";
-// }
-
-// function isArray(subject) {
-//   return Array.isArray(subject);
-// }
-
-// console.log(isArray(axel));
-
-// function deepCopy(subject) {
-//   let copySubject;
-
-//   const subjectIsObject = isObjetc(subject);
-//   const subjectIsArray = isArray(subject);
-
-//   if (subjectIsObject) {
-//     copySubject = {};
-//   } else if (subjectIsArray) {
-//     copySubject = [];
-//   } else {
-//     return subject;
-//   }
-
-//   for (key in subject) {
-//     const keyIsObject = isObjetc(subject[key]);
-//     if (keyIsObject) {
-//       copySubject[key] = deepCopy(subject[key]);
-//     } else {
-//       if (subjectIsArray) {
-//         copySubject.push(subject[key]);
-//       } else {
-//         copySubject[key] = subject[key];
-//       }
-//     }
-//   }
-
-//   return copySubject;
-// }
-
 // const riki = deepCopy(axel);
 
 // riki.name = "Riki";
@@ -327,28 +287,96 @@
 // console.log(riki);
 // console.log(axel);
 
-function requiredParam(param) {
-  throw new Error(param + " Missing param");
+// function requiredParam(param) {
+//   throw new Error(param + " Missing param");
+// }
+
+// function createStudent({ name = requiredParam("name"), age, email = requiredParam("email"), twitter, instagram, approvedCourses = [], learningPaths = [] } = {}) {
+//   return {
+//     name: name,
+//     age: age,
+//     email: email,
+//     socialMedia: { twitter: twitter, instagram: instagram },
+//     approvedCourses: approvedCourses,
+//     learningPaths: learningPaths,
+//   };
+// }
+
+// const breda = createStudent({
+//   email: "dfsfd@fds",
+//   name: "Breda",
+//   age: 20,
+//   twitter: "xaeltoro",
+//   instagram: "axsup",
+//   approvedCourses: ["JavaScript", "Node", "React"],
+// });
+
+// console.log(breda);
+
+function isObjetc(subject) {
+  return typeof subject == "object";
 }
 
-function createStudent({ name = requiredParam("name"), age, email = requiredParam("email"), twitter, instagram, approvedCourses = [], learningPaths = [] } = {}) {
-  return {
-    name: name,
-    age: age,
-    email: email,
-    socialMedia: { twitter: twitter, instagram: instagram },
-    approvedCourses: approvedCourses,
-    learningPaths: learningPaths,
-  };
+function isArray(subject) {
+  return Array.isArray(subject);
 }
 
-const breda = createStudent({
-  email: "dfsfd@fds",
-  name: "Breda",
-  age: 20,
-  twitter: "xaeltoro",
-  instagram: "axsup",
-  approvedCourses: ["JavaScript", "Node", "React"],
+function deepCopy(subject) {
+  let copySubject;
+
+  const subjectIsObject = isObjetc(subject);
+  const subjectIsArray = isArray(subject);
+
+  if (subjectIsObject) {
+    copySubject = {};
+  } else if (subjectIsArray) {
+    copySubject = [];
+  } else {
+    return subject;
+  }
+
+  for (key in subject) {
+    const keyIsObject = isObjetc(subject[key]);
+    if (keyIsObject) {
+      copySubject[key] = deepCopy(subject[key]);
+    } else {
+      if (subjectIsArray) {
+        copySubject.push(subject[key]);
+      } else {
+        copySubject[key] = subject[key];
+      }
+    }
+  }
+
+  return copySubject;
+}
+
+const studentBase = {
+  name: undefined,
+  age: undefined,
+  email: undefined,
+  socialMedia: {
+    twitter: undefined,
+    instagram: undefined,
+  },
+  approvedCourses: undefined,
+  learningPaths: undefined,
+};
+
+const riki = deepCopy(studentBase);
+
+Object.defineProperty(riki, "name", {
+  value: "Riki",
+  enumerable: true,
+  writable: true,
+  configurable: true,
 });
 
-console.log(breda);
+Object.defineProperty(riki.socialMedia, "twitter", {
+  value: "Riki",
+  enumerable: true,
+  writable: true,
+  configurable: true,
+});
+
+console.log(riki);
