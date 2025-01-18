@@ -354,51 +354,53 @@ function deepCopy(subject) {
 const studentBase = {
   name: undefined,
   age: undefined,
-  email: undefined,
-  socialMedia: {
-    twitter: undefined,
+  socualMedia: {
+    x: undefined,
     instagram: undefined,
   },
-  approvedCourses: undefined,
-  learningPaths: undefined,
+  learningPaths: [],
+  approvedCourses: [],
+  printName: function () {
+    return `User name: ${this.name}`;
+  },
 };
 
-const riki = deepCopy(studentBase);
+const axel = deepCopy(studentBase);
 
-Object.defineProperty(riki, "name", {
-  value: "Riki",
-  enumerable: true,
-  writable: true,
-  configurable: true,
-});
+axel.name = "Axel";
+axel.age = 30;
+axel.socualMedia.x = "axeltoro";
+axel.socualMedia.instagram = "axsup";
+axel.learningPaths = ["JavaScript", "Node", "React"];
+axel.approvedCourses = ["JavaScript", "Node", "React"];
 
-Object.defineProperty(riki.socialMedia, "twitter", {
-  value: "Riki",
-  enumerable: true,
-  writable: true,
-  configurable: true,
-});
+// Object.defineProperty(axel, "name", {
+//   value: "Axel",
+//   configurable: false,
+// });
 
-// console.log(riki);
+Object.seal(axel);
+
+console.log(axel);
 
 // OLD
 
-function requiredParam(param) {
-  throw new Error(`${param} is missing`);
-}
+// function requiredParam(param) {
+//   throw new Error(`${param} is missing`);
+// }
 
-function createStudent({ name = requiredParam(name), age = requiredParam(age), x, facebook, learningPaths = [] } = {}) {
-  return {
-    name,
-    age,
-    socialMedia: {
-      x,
-      facebook,
-    },
-    learningPaths,
-  };
-}
+// function createStudent({ name = requiredParam(name), age = requiredParam(age), x, facebook, learningPaths = [] } = {}) {
+//   return {
+//     name,
+//     age,
+//     socialMedia: {
+//       x,
+//       facebook,
+//     },
+//     learningPaths,
+//   };
+// }
 
-const erik = createStudent({ name: "Eriksson" });
+// const erik = createStudent({ name: "Eriksson" });
 
-console.log(erik);
+// console.log(erik);
