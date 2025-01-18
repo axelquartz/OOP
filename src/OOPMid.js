@@ -379,4 +379,21 @@ Object.defineProperty(riki.socialMedia, "twitter", {
   configurable: true,
 });
 
-console.log(riki);
+// console.log(riki);
+
+// OLD
+
+function createStudent({ name, age, x, facebook }) {
+  return {
+    name,
+    age,
+    socialMedia: {
+      x,
+      facebook,
+    },
+  };
+}
+
+const erik = createStudent({ name: "Erik", age: 30, x: "erikquartz", facebook: "facebook.con/erikchill" });
+
+console.log(erik);
