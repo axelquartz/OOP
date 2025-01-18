@@ -383,7 +383,11 @@ Object.defineProperty(riki.socialMedia, "twitter", {
 
 // OLD
 
-function createStudent({ name, age, x, facebook }) {
+function requiredParam(param) {
+  throw new Error(`${param} is missing`);
+}
+
+function createStudent({ name = requiredParam(name), age = requiredParam(age), x, facebook, learningPaths = [] } = {}) {
   return {
     name,
     age,
@@ -391,9 +395,10 @@ function createStudent({ name, age, x, facebook }) {
       x,
       facebook,
     },
+    learningPaths,
   };
 }
 
-const erik = createStudent({ name: "Erik", age: 30, x: "erikquartz", facebook: "facebook.con/erikchill" });
+const erik = createStudent({ name: "Eriksson" });
 
 console.log(erik);
