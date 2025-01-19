@@ -313,94 +313,109 @@
 
 // console.log(breda);
 
-function isObjetc(subject) {
-  return typeof subject == "object";
-}
+// OLD Abstraccion de objetos literales y Deep Copy
 
-function isArray(subject) {
-  return Array.isArray(subject);
-}
+// function isObjetc(subject) {
+//   return typeof subject == "object";
+// }
 
-function deepCopy(subject) {
-  let copySubject;
+// function isArray(subject) {
+//   return Array.isArray(subject);
+// }
 
-  const subjectIsObject = isObjetc(subject);
-  const subjectIsArray = isArray(subject);
+// function deepCopy(subject) {
+//   let copySubject;
 
-  if (subjectIsObject) {
-    copySubject = {};
-  } else if (subjectIsArray) {
-    copySubject = [];
-  } else {
-    return subject;
-  }
+//   const subjectIsObject = isObjetc(subject);
+//   const subjectIsArray = isArray(subject);
 
-  for (key in subject) {
-    const keyIsObject = isObjetc(subject[key]);
-    if (keyIsObject) {
-      copySubject[key] = deepCopy(subject[key]);
-    } else {
-      if (subjectIsArray) {
-        copySubject.push(subject[key]);
-      } else {
-        copySubject[key] = subject[key];
-      }
-    }
-  }
+//   if (subjectIsObject) {
+//     copySubject = {};
+//   } else if (subjectIsArray) {
+//     copySubject = [];
+//   } else {
+//     return subject;
+//   }
 
-  return copySubject;
-}
+//   for (key in subject) {
+//     const keyIsObject = isObjetc(subject[key]);
+//     if (keyIsObject) {
+//       copySubject[key] = deepCopy(subject[key]);
+//     } else {
+//       if (subjectIsArray) {
+//         copySubject.push(subject[key]);
+//       } else {
+//         copySubject[key] = subject[key];
+//       }
+//     }
+//   }
 
-const studentBase = {
-  name: undefined,
-  age: undefined,
-  socualMedia: {
-    x: undefined,
-    instagram: undefined,
-  },
-  learningPaths: [],
-  approvedCourses: [],
-  printName: function () {
-    return `User name: ${this.name}`;
-  },
-};
+//   return copySubject;
+// }
 
-const axel = deepCopy(studentBase);
+// const studentBase = {
+//   name: undefined,
+//   age: undefined,
+//   socualMedia: {
+//     x: undefined,
+//     instagram: undefined,
+//   },
+//   learningPaths: [],
+//   approvedCourses: [],
+//   printName: function () {
+//     return `User name: ${this.name}`;
+//   },
+// };
 
-axel.name = "Axel";
-axel.age = 30;
-axel.socualMedia.x = "axeltoro";
-axel.socualMedia.instagram = "axsup";
-axel.learningPaths = ["JavaScript", "Node", "React"];
-axel.approvedCourses = ["JavaScript", "Node", "React"];
+// const axel = deepCopy(studentBase);
 
-// Object.defineProperty(axel, "name", {
-//   value: "Axel",
-//   configurable: false,
-// });
+// axel.name = "Axel";
+// axel.age = 30;
+// axel.socualMedia.x = "axeltoro";
+// axel.socualMedia.instagram = "axsup";
+// axel.learningPaths = ["JavaScript", "Node", "React"];
+// axel.approvedCourses = ["JavaScript", "Node", "React"];
 
-Object.seal(axel);
+// Object.seal(axel);
+// console.log(Object.isSealed(axel));
 
-console.log(axel);
+// console.log(axel);
 
 // OLD
 
-// function requiredParam(param) {
-//   throw new Error(`${param} is missing`);
-// }
+function requiredParam(param) {
+  throw new Error(`${param} is missing`);
+}
 
-// function createStudent({ name = requiredParam(name), age = requiredParam(age), x, facebook, learningPaths = [] } = {}) {
-//   return {
-//     name,
-//     age,
-//     socialMedia: {
-//       x,
-//       facebook,
-//     },
-//     learningPaths,
-//   };
-// }
+function createStudent({ name = requiredParam(name), age = 0, x, facebook, learningPaths = [] } = {}) {
+  const private = {
+    _name: name,
+  };
 
-// const erik = createStudent({ name: "Eriksson" });
+  const public = {
+    age: age,
+    socialMedia: {
+      x,
+      facebook,
+    },
+    learningPaths,
+    readName: function () {
+      return private["_name"];
+    },
+    changeName: function (name) {
+      private["_name"] = name;
+    },
+  };
 
-// console.log(erik);
+  return public;
+}
+
+const erik = createStudent({ name: "Eriksson" });
+
+erik.changeName("Erik");
+erik.age = 30;
+
+erik.changeName("Eriksson");
+console.log(erik.readName());
+
+console.log(erik);
