@@ -399,23 +399,40 @@ function createStudent({ name = requiredParam(name), age = 0, x, facebook, learn
       facebook,
     },
     learningPaths,
-    readName: function () {
+    get name() {
       return private["_name"];
     },
-    changeName: function (name) {
-      private["_name"] = name;
+    set name(newName) {
+      if (newName.length < 3) {
+        console.log("Name is too short");
+        return;
+      } else {
+        return (private["_name"] = newName);
+      }
     },
+    // readName: function () {
+    //   return private["_name"];
+    // },
+    // changeName: function (name) {
+    //   private["_name"] = name;
+    // },
   };
+
+  // Object.defineProperty(public, "readName", {
+  //   configurable: false,
+  //   writable: false,
+  // });
+
+  // Object.defineProperty(public, "changeName", {
+  //   configurable: false,
+  //   writable: false,
+  // });
 
   return public;
 }
 
 const erik = createStudent({ name: "Eriksson" });
 
-erik.changeName("Erik");
 erik.age = 30;
-
-erik.changeName("Eriksson");
-console.log(erik.readName());
-
-console.log(erik);
+erik.name = "Erik";
+console.log(erik.name);
