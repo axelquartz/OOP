@@ -387,75 +387,83 @@ function requiredParam(param) {
   throw new Error(`${param} is missing`);
 }
 
-function createLearningPath({ name = requiredParam("name"), courses = [] } = {}) {
+function LearningPath({ name = requiredParam("name"), courses = [] } = {}) {
   const private = {
     _name: name,
     _courses: courses,
   };
+  this.name = name;
+  this.courses = courses;
 
-  const public = {
-    get name() {
-      return private["_name"];
-    },
-    get courses() {
-      return private["_courses"];
-    },
+  // const public = {
+  //   get name() {
+  //     return private["_name"];
+  //   },
+  //   get courses() {
+  //     return private["_courses"];
+  //   },
 
-    set name(newName) {
-      if (newName.length < 3) {
-        console.log("Name is too short");
-        return;
-      } else {
-        return (private["_name"] = newName);
-      }
-    },
-  };
+  //   set name(newName) {
+  //     if (newName.length < 3) {
+  //       console.log("Name is too short");
+  //       return;
+  //     } else {
+  //       return (private["_name"] = newName);
+  //     }
+  //   },
+  // };
 }
 
 function createStudent({ name = requiredParam(name), age = 0, x, facebook, learningPaths = [] } = {}) {
   const private = {
     _name: name,
   };
-
-  const public = {
-    age: age,
-    socialMedia: {
-      x,
-      facebook,
-    },
-    get name() {
-      return private["_name"];
-    },
-    set name(newName) {
-      if (newName.length < 3) {
-        console.log("Name is too short");
-        return;
-      } else {
-        return (private["_name"] = newName);
-      }
-    },
-    get learningPaths() {
-      return private["_learningPaths"];
-    },
-
-    set learningPaths(newLearningPaths) {
-      if (newLearningPaths.length === 0) {
-        console.log("Learning paths is empty");
-        return;
-      } else if (!Array.isArray(newLearningPaths)) {
-        console.log("Learning paths is not an array");
-        return;
-      } else {
-        return (private["_learningPaths"] = newLearningPaths);
-      }
-    },
-    // readName: function () {
-    //   return private["_name"];
-    // },
-    // changeName: function (name) {
-    //   private["_name"] = name;
-    // },
+  this.name = name;
+  this.age = age;
+  this.socialMedia = {
+    x,
+    facebook,
   };
+  this.learningPaths = learningPaths;
+
+  // const public = {
+  //   age: age,
+  //   socialMedia: {
+  //     x,
+  //     facebook,
+  //   },
+  // get name() {
+  //   return private["_name"];
+  // },
+  // set name(newName) {
+  //   if (newName.length < 3) {
+  //     console.log("Name is too short");
+  //     return;
+  //   } else {
+  //     return (private["_name"] = newName);
+  //   }
+  // },
+  // get learningPaths() {
+  //   return private["_learningPaths"];
+  // },
+
+  // set learningPaths(newLearningPaths) {
+  //   if (newLearningPaths.length === 0) {
+  //     console.log("Learning paths is empty");
+  //     return;
+  //   } else if (!Array.isArray(newLearningPaths)) {
+  //     console.log("Learning paths is not an array");
+  //     return;
+  //   } else {
+  //     return (private["_learningPaths"] = newLearningPaths);
+  //   }
+  // },
+  // readName: function () {
+  //   return private["_name"];
+  // },
+  // changeName: function (name) {
+  //   private["_name"] = name;
+  // },
 
   // Object.defineProperty(public, "readName", {
   //   configurable: false,
@@ -467,12 +475,12 @@ function createStudent({ name = requiredParam(name), age = 0, x, facebook, learn
   //   writable: false,
   // });
 
-  return public;
+  // return public;
 }
 
 const erik = createStudent({ name: "Eriksson" });
 
-// erik.learningPaths = ["JavaScript", "Node", "React"];
+erik.learningPaths = ["JavaScript", "Node", "React"];
 
 console.log(erik.learningPaths);
 
