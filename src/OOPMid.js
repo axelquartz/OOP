@@ -387,6 +387,31 @@ function requiredParam(param) {
   throw new Error(`${param} is missing`);
 }
 
+function createLearningPath({ name = requiredParam("name"), courses = [] } = {}) {
+  const private = {
+    _name: name,
+    _courses: courses,
+  };
+
+  const public = {
+    get name() {
+      return private["_name"];
+    },
+    get courses() {
+      return private["_courses"];
+    },
+
+    set name(newName) {
+      if (newName.length < 3) {
+        console.log("Name is too short");
+        return;
+      } else {
+        return (private["_name"] = newName);
+      }
+    },
+  };
+}
+
 function createStudent({ name = requiredParam(name), age = 0, x, facebook, learningPaths = [] } = {}) {
   const private = {
     _name: name,
@@ -398,7 +423,6 @@ function createStudent({ name = requiredParam(name), age = 0, x, facebook, learn
       x,
       facebook,
     },
-    learningPaths,
     get name() {
       return private["_name"];
     },
@@ -408,6 +432,21 @@ function createStudent({ name = requiredParam(name), age = 0, x, facebook, learn
         return;
       } else {
         return (private["_name"] = newName);
+      }
+    },
+    get learningPaths() {
+      return private["_learningPaths"];
+    },
+
+    set learningPaths(newLearningPaths) {
+      if (newLearningPaths.length === 0) {
+        console.log("Learning paths is empty");
+        return;
+      } else if (!Array.isArray(newLearningPaths)) {
+        console.log("Learning paths is not an array");
+        return;
+      } else {
+        return (private["_learningPaths"] = newLearningPaths);
       }
     },
     // readName: function () {
@@ -433,6 +472,10 @@ function createStudent({ name = requiredParam(name), age = 0, x, facebook, learn
 
 const erik = createStudent({ name: "Eriksson" });
 
-erik.age = 30;
-erik.name = "Erik";
-console.log(erik.name);
+// erik.learningPaths = ["JavaScript", "Node", "React"];
+
+console.log(erik.learningPaths);
+
+// erik.age = 30;
+// erik.name = "Erik";
+// console.log(erik.name);
